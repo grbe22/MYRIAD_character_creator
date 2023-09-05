@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<HTML>
+
+
+<meta charset="UTF-8">
+
+<link href="styles.css" rel="stylesheet">
+<link media="(max-width: 800px)" rel="stylesheet" href="small_styles.css">
+
+<title>Myriad Character Creator</title>
+
+<body onload = "bugFixFunction()">
+
+	<h1>Myriad Character Creator</h1>
+	<h3>It's highly suggested you work left to right. Bugs may occur if you change the order.</h3>
+	
+	<span class = "spick">
+	<div id = 'statText' class = 'notRight'>
+		<h3>Generates random stats, or input them yourself.<br> Stats cannot be below 2 or above 12 in this phase.</h3>
+		
+		<button onclick = "randomizeStats()" id = "statGen"> Generate Stats </button>
+		<button onclick = "clearLog()"> Clear </button>
+		
+		<br><br>
+		
+		<table>
+		
+			<tr>
+				<th>Power - </th>
+				<th><input type = "number" onchange = "updateStats()" id = "Power"></th>
+			</tr>
+			<tr>
+				<th>Finesse - </th>
+				<th><input type = "number" onchange = "updateStats()" id = "Finesse"></th>
+			</tr>
+			<tr>
+				<th>Insight - </th>
+				<th><input type = "number" onchange = "updateStats()" id = "Insight"></th>
+			</tr>
+			<tr>
+				<th>Charm - </th>
+				<th><input type = "number" onchange = "updateStats()" id = "Charm"></th>
+			</tr>
+			<tr>
+				<th>Arcane - </th>
+				<th><input type = "number" onchange = "updateStats()" id = "Arcane"></th>
+			</tr>
+			<tr>
+				<th>Occult - </th>
+				<th><input type = "number" onchange = "updateStats()" id = "Occult"></th>
+			</tr>
+			<tr>
+				<th>Luck - </th>
+				<th><input type = "number" onchange = "updateStats()" id = "Luck"></th>
+			</tr>
+		
+		</table>
+		
+		<h4> You may switch any two stats before you continue. </h4>
+		<select id = "stat1">
+			<option value = "None"> - </option>
+			<option value = "Power"> Power </option>
+			<option value = "Finesse"> Finesse </option>
+			<option value = "Insight"> Insight </option>
+			<option value = "Charm"> Charm </option>
+			<option value = "Arcane"> Arcane </option>
+			<option value = "Occult"> Occult </option>
+			<option value = "Luck"> Luck </option>
+		</select>
+		&nbsp;&nbsp;&#x2194;&nbsp;&nbsp;
+		<select id = "stat2">
+			<option value = "None"> - </option>
+			<option value = "Power"> Power </option>
+			<option value = "Finesse"> Finesse </option>
+			<option value = "Insight"> Insight </option>
+			<option value = "Charm"> Charm </option>
+			<option value = "Arcane"> Arcane </option>
+			<option value = "Occult"> Occult </option>
+			<option value = "Luck"> Luck </option>
+		</select>
+		&nbsp;&nbsp;&nbsp;
+		<button onclick = "switchStats()" id = "switchButton"> Switch </button>
+		
+		<br><br>
+
+		<div id = "log" class = "log"></div>
+		
+		<br><br>
+		
+		<button onclick = "finishStats()" id = "statLock">Lock stats</button>
+		
+	</div>
+	
+	<div id = 'loreText' class = 'notRight'>
+	
+	<h3> In this panel, you get to choose nationality, kindred, gender, and job. Only your job affects gameplay.</h3>
+	
+	Name:&emsp;<input type = "text" class = "long" id = "name">
+	
+	&emsp;
+	
+	Gender:&emsp;
+	<select id = "gender">
+		<option value = "None"> - </option>
+		<option value = "Female">Female</option>
+		<option value = "Male">Male</option>
+		<option value = "Non-binary">Non-binary</option>
+		<option value = "Other">Other</option>
+	</select>
+	
+	<br><br>
+	
+	Kindred:&emsp;
+	<select id = "kindred" onchange = "updateKinLog()">
+		<option value = "None"> - </option>
+		<option value = "Animus">Animus</option>
+		<option value = "Beastkin">Beastkin</option>
+		<option value = "Birdling">Birdling</option>
+		<option value = "Froglin">Froglin</option>
+		<option value = "Gnome">Gnome</option>
+		<option value = "Manling">Manling</option>
+		<option value = "Mothma">Mothma</option>
+		<option value = "Sylvan">Sylvan</option>
+	</select>
+	
+	<br><br>
+	
+	<div class = "log" id = "kinLog"></div>
+	
+	<br><br>
+	
+	Nationality:&emsp;
+	<select id = "nationality" onchange = "updateNatLog()">
+		<option value = "None"> - </option>
+		<option value = "Forcosia">Forcosia</option>
+		<option value = "Frogland">Frogland</option>
+		<option value = "Gobani">Gobani</option>
+		<option value = "Luxion">Luxion</option>
+		<option value = "Polaris">Polaris</option>
+		<option value = "The Great Swamp">The Great Swamp</option>
+		<option value = "The Hills">The Hills</option>
+		<option value = "Three Kingdoms">Three Kingdoms</option>
+	</select>
+	
+	<br><br>
+	
+	<div class = "log" id = "natLog"></div>
+	
+	<br><br>
+	
+	<u>Jobs</u>&emsp;
+	
+	<select id = "job" onchange = "updateJobLog()">
+		<option value = "None"> - </option>
+		<option value = "Duelist">Duelist</option>
+		<option value = "Hedgewitch">Hedgewitch</option>
+		<option value = "Hunter">Hunter</option>
+		<option value = "Marauder">Marauder</option>
+		<option value = "Merchant">Merchant</option>
+		<option value = "Mystic">Mystic</option>
+		<option value = "Occultist">Occultist</option>
+		<option value = "Performer">Performer</option>
+		<option value = "Sage">Sage</option>
+		<option value = "Scholar">Scholar</option>
+		<option value = "Thief">Thief</option>
+	</select>
+	
+	<br><br>
+	
+	<div class = "log" id = "jobLog"></div>
+	
+	</div>
+	
+	<div id = 'invText'>
+		<h3>Final stat scores are calculated as follows:</h3>
+		<table class = "tableu">
+		<tr>
+			<th>2</th><th>3</th><th>4</th><th>5</th><th>6,7,8</th><th>9</th><th>10</th><th>11</th><th>12+</th>
+		</tr>
+		<tr>
+			<th>-4</th><th>-3</th><th>-2</th><th>-1</th><th>+0</th><th>+1</th><th>+2</th><th>+3</th><th>+4, +1 for every 2 higher.</th>
+		</tr>
+		</table>
+		<h3>Stat scores:</h3>
+		Pwr: <span id = "Powerf"></span><br>
+		Fin: <span id = "Finessef"></span><br>
+		Ins: <span id = "Insightf"></span><br>
+		Cha: <span id = "Charmf"></span><br>
+		Arc: <span id = "Arcanef"></span><br>
+		Occ: <span id = "Occultf"></span><br>
+		Lck: <span id = "Luckf"></span><br>
+		<h3>Dodge is 8 + Fin, HP starts at 1d6 + Pwr, and cannot be below 1.</h3>
+		Dodge: <span id = "Dodge"></span><br>
+		Max HP: <input type = "number" id = "HealthDie" onchange = "updateSumHp()"><span class = "button" onclick = "genHealth()">1d6</span> + <span id = "Hit"></span> = <span id = "sumHp"></span><br>
+		<h4> Generator currently does not contain inventory options. It would take several dev hours just to transfer data, and even more time to implement it.</h4>
+	</div>
+	</span>
+
+	<p id = "p" hidden></p>
+	
+	<script src = "func.js"></script>
+
+</body>
+
+
+</HTML>

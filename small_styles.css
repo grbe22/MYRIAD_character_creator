@@ -1,0 +1,10 @@
+div {
+	width: 100%;
+}
+span {
+	flex-direction: column;
+}
+.notRight {
+	border-right: 2px dashed #000;
+	border-bottom: 0px solid #000;
+}
